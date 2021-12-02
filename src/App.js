@@ -1,5 +1,5 @@
 import './App.css';
-import { Switch,Route } from 'react-router';
+import { Routes ,Route } from 'react-router-dom';
 import { routes } from './routes/routes';
 
 
@@ -11,13 +11,11 @@ function App() {
     {/* <Header/> */}
 
     <div>
-      <Switch>
+      <Routes>
           {
-            routes.map(route=>
-              <Route component={route.component} path={route.path} exact={route.exact} key={route.path}/>
-            )
+            routes.map(route=><Route element={route.element} path={route.path} exact={route.exact} key={route.path}/>)
           }
-      </Switch>
+      </Routes>
     </div>
 
   </div>

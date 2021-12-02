@@ -56,8 +56,6 @@ export default function Currentdata() {
         }
     }
 
-    console.log(state)
-
     return (
         <div>
             <div>
