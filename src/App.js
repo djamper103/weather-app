@@ -1,13 +1,26 @@
 import './App.css';
-import Currentdata from './components/currentData';
+import { Switch,Route } from 'react-router';
+import { routes } from './routes/routes';
 
 
 
 function App() {
   return (
     <div className="App">
-      <Currentdata/>
+
+    {/* <Header/> */}
+
+    <div>
+      <Switch>
+          {
+            routes.map(route=>
+              <Route component={route.component} path={route.path} exact={route.exact} key={route.path}/>
+            )
+          }
+      </Switch>
     </div>
+
+  </div>
   );
 }
 
