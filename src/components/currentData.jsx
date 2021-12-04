@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import { v4 as uuidv4 } from 'uuid';
 import { usePosition } from 'use-position';
 import Input from "./input/input";
+import Mapping from "./mapping/mapping";
 
 
 const apiKey = "82207646ff9e6f42932e9fc60a8799e6"
@@ -24,7 +24,7 @@ export default function Currentdata() {
                 .then(response => {
                     if(cityNameAll.includes(response.data.city.name)===false){
                         setCityNameAll([response.data.city.name.toLowerCase(),...cityNameAll])
-                        setState([[...response.data.list.slice(0, 8)],...state])
+                        setState([response.data,...state])
                     } 
                 })
         }
@@ -36,7 +36,7 @@ export default function Currentdata() {
         cityNameAll.forEach(el=>{
             axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${el}&appid=${apiKey}`)
                 .then(response => {
-                    cityDataAll.push(response.data.list.slice(0, 8))
+                    cityDataAll.push(response.data)
             })
         })
         setState(cityDataAll)
@@ -49,7 +49,7 @@ export default function Currentdata() {
             axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityNameClean}&appid=${apiKey}`)
                 .then(response => {
                     setCityNameAll([cityNameClean,...cityNameAll])
-                    setState([[...response.data.list.slice(0, 8)],...state])
+                    setState([response.data,...state])
                 })
         } else {
             console.log("Input city name")
@@ -60,26 +60,8 @@ export default function Currentdata() {
 
     return (
         <div>
-            <div>
                 <Input search={search} cityName={cityName} setCityName={setCityName} />
-            </div>
-
-            <div>
-                {
-                    state ? state.map((el,index) => {
-                        return <div key={cityNameAll[index]}>
-                            {cityNameAll[index]}
-                            <div>
-                                {el.map(el1=>{
-                                    return <div key={uuidv4()}>{el1.dt_txt}  :  {Math.trunc(el1.main.temp - 273.15)} C</div>
-                                    })
-                                }
-                            </div>
-                        </div>
-                    }) : null
-                }
-            </div>
-
+                <Mapping state={state}/>
         </div>
     );
 }
