@@ -12,7 +12,7 @@ export default function Currentdata() {
 
     const [state, setState] = useState([])
     const [cityName, setCityName] = useState("")
-    const [cityNameAll, setCityNameAll] = useState([])
+    const [cityNameAll, setCityNameAll] = useState(['kiev', 'tokyo', 'berlin', 'london', 'beijing'])
 
 
     const { latitude, longitude, error } = usePosition();
@@ -22,66 +22,60 @@ export default function Currentdata() {
         if (latitude && longitude && !error) {
             axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
                 .then(response => {
-                    setState(response.data.list.slice(0, 8))
-                })
-        }else{
-            axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Kiev&appid=${apiKey}`)
-                .then(response => {
-                    setState(response.data.list.slice(0, 8))
+                    if(cityNameAll.includes(response.data.city.name)===false){
+                        setCityNameAll([response.data.city.name.toLowerCase(),...cityNameAll])
+                        setState([[...response.data.list.slice(0, 8)],...state])
+                    } 
                 })
         }
     }, [latitude, longitude]);
 
+
     useEffect(() => {
-        localStorage.getItem('cityName') ?
-            setCityNameAll(Object.keys(JSON.parse(localStorage.getItem('cityName'))))
-            : setCityNameAll(['Kiev', 'Tokyo', 'Berlin', 'London', 'Beijing'])
-    }, [localStorage.getItem('cityName')]);
+        let cityDataAll=[]
+        cityNameAll.forEach(el=>{
+            axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${el}&appid=${apiKey}`)
+                .then(response => {
+                    cityDataAll.push(response.data.list.slice(0, 8))
+            })
+        })
+        setState(cityDataAll)
+    }, []);
+
 
     const search = () => {
-
         let cityNameClean=cityName.replace(/\s/g, '').trim().toLowerCase()
-
-        if (cityNameClean.length > 3) {
-            let allCity = {}
-            if (localStorage.getItem('cityName')) {
-                let b = JSON.parse(localStorage.getItem('cityName'))
-                allCity[cityName] = cityNameClean
-                let a = { ...b, ...allCity }
-                localStorage.setItem('cityName', JSON.stringify(a))
-            } else {
-                allCity[cityName] = cityNameClean
-                localStorage.setItem('cityName', JSON.stringify(allCity))
-            }
-
+        if (cityNameClean.length > 3 && cityNameAll.includes(cityNameClean)===false) {
             axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityNameClean}&appid=${apiKey}`)
-                // axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
                 .then(response => {
-                    console.log(response)
-                    setState(response.data.list.slice(0, 8))
+                    setCityNameAll([cityNameClean,...cityNameAll])
+                    setState([[...response.data.list.slice(0, 8)],...state])
                 })
         } else {
             console.log("Input city name")
         }
     }
 
+    console.log(cityNameAll,state)
+
     return (
         <div>
             <div>
                 <Input search={search} cityName={cityName} setCityName={setCityName} />
-                <select name="select" onChange={event => { setCityName(event.target.value) }}>
-                    {
-                        cityNameAll ? cityNameAll.map(item => (
-                            <option value={item} key={uuidv4()}>{item}</option>
-                        )) : "Data has not been loaded yet"
-                    }
-                </select>
             </div>
 
             <div>
                 {
-                    state ? state.map(el => {
-                        return <div key={uuidv4()}>{el.dt_txt}  :  {Math.trunc(el.main.temp - 273.15)} C</div>
+                    state ? state.map((el,index) => {
+                        return <div key={cityNameAll[index]}>
+                            {cityNameAll[index]}
+                            <div>
+                                {el.map(el1=>{
+                                    return <div key={uuidv4()}>{el1.dt_txt}  :  {Math.trunc(el1.main.temp - 273.15)} C</div>
+                                    })
+                                }
+                            </div>
+                        </div>
                     }) : null
                 }
             </div>
