@@ -1,49 +1,47 @@
-import React from 'react'
-import { VictoryChart, VictoryAxis, VictoryBar, VictoryTheme } from 'victory';
+import React,{useState,useEffect} from 'react'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 
-export default function Charts() {
+export default function Charts({state}) {
 
-    const data = [
-        { day: 1, temp: 5 },
-        { day: 2, temp: 2 },
-        { day: 3, temp: 1 },
-        { day: 5, temp: -2 },
-        { day: 6, temp: 3 },
-        { day: 7, temp: 5 },
-        { day: 8, temp: 6 }
-    ];
+    const [data,setData]=useState()
 
-    // const data = [
-    //     {Monday: 1, temp: 5},
-    //     {Tuesday: 2, temp: 2},
-    //     {Wednesday: 3, temp: 1},
-    //     {Thursday: 4, temp: -2},
-    //     {Friday: 4, temp: 3},
-    //     {Satuday: 4, temp: 5},
-    //     {Sunday: 4, temp: 6}
-    //   ];
+    useEffect(()=>{
+        let newData=[]
+        state.list.forEach((el,index) => {
+            if(index%5===0){
+                let a={
+                    temp:Math.trunc(el.main.temp - 273.15),
+                    time:el.dt_txt.slice(5, 11).replace("-","."),
+                }
+                newData.push(a)
+            }
+        });
+        setData(newData)
+    },[])
+    
+    console.log(data)
+
     return (
-        <div>
-                        {/* <VictoryChart
-                // adding the material theme provided with Victory
-                theme={VictoryTheme.material}
-                domainPadding={20}
-            >
-                <VictoryAxis
-                    tickFormat={["Monday", "Thuesday", "Wednesday", "Thursday","Friday","Saturday","Sunday"]}
-                />
-                <VictoryAxis
-                    dependentAxis
-                    tickFormat={(x) => (`${x} C`)}
-                />
-
-                <VictoryBar
-                    data={data}
-                    x="day"
-                    y="temp"
-                />
-            </VictoryChart> */}
-        </div>
+        <ResponsiveContainer width="90%" aspect={3}>
+        <LineChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 15,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          
+          <XAxis dataKey="time" tick={{fill:"black"}}/>
+          <YAxis tick={{fill:"black"}} />
+          <Tooltip contentStyle={{ backgroundColor: "#8884d8", color: "#fff" }} itemStyle={{ color: "#fff" }} cursor={false}/>
+          <Line type="monotone" dataKey="temp" stroke="#8884d8" strokeWidth="5" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:5}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}} />
+          
+        </LineChart>
+      </ResponsiveContainer>
     )
 }

@@ -1,0 +1,14 @@
+.container{
+    display:flex;
+    flex-Direction:column;
+    align-Items:flex-start;
+}
+
+.cityName{
+    margin-bottom: 4%;
+    font-size: 20px;
+}
+
+.date{
+    font-size: 16px;
+}

@@ -1,0 +1,21 @@
+.container {
+  width: 10vw;
+  display: flex;
+  flex-direction: column;
+}
+.containerMain {
+  display: flex;
+  font-size: 26px;
+  margin-bottom: 10%;
+}
+
+.containerMainModal{
+    display: flex;
+    font-size: 26px;
+}
+
+.feelsLike {
+  color: #c5c5c5;
+  display: flex;
+  font-size: 17px;
+}

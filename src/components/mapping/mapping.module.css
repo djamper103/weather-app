@@ -2,9 +2,58 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-evenly;
-    margin:0 2% 5%;
+    justify-content: center;
+    margin:2%;
 }
+
 .containerMain{
     margin-bottom: 20px;
+    background-color: #fffaf1;
+    width: 400px;
+    border-radius: 20px;
+    padding: 1%;
+    margin: 2%;
+}
+
+.containerMain1{
+    margin-bottom: 20px;
+    background-color: #f1f2ff;
+    width: 400px;
+    border-radius: 20px;
+    padding: 1%;
+    margin: 2%;
+}
+
+
+.containerFooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.containerTemp{
+ display: flex;
+}
+
+.temp{
+    color: #c5c5c5;
+}
+
+.feelsLike{
+    color: #c5c5c5;
+}
+
+
+
+.containerFooter span{
+    color:#4da0ea;
+}
+
+.containerWeatherInfo{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 2%;
 }
