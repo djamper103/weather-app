@@ -15,28 +15,28 @@ export default function Modal({ state, modalActive, setModalActive,deleteCity })
 
     return (
         <div className={modalActive ? style.containerActive : style.container} onClick={() => setModalActive(false)}>
-            <div onClick={(e) => e.stopPropagation()}>
-                <div key={state.city.name} className={Math.trunc(state.list[0].main.temp - 273.15) > 0 ? style.containerMainTemp : style.containerMainTemp1}>
+                <div key={state.city.name} className={Math.trunc(state.list[0].main.temp - 273.15) > 0 ? style.containerMainTemp : style.containerMainTemp1}
+                    onClick={(e) => e.stopPropagation()}>
                     <div style={{ display: "flex", marginBottom: "5%", justifyContent: "space-between" }}>
                         <CityName state={state} />
                         <WeatherSky state={state} />
                     </div>
+                    
+                    <div className={style.chart}>
+                        <Charts state={state} />
+                    </div>
 
-                    <Charts state={state} />
-
-                    <div className={style.containerFooter}>
+                    <div className={style.containerMain}>
                         <TimesOfDay state={state} type={'modal'} />
                         <Widn state={state} />
                         <Humidity state={state} />
                         <Pressure state={state} />
                     </div>
+                    <div className={style.containerFooter}>
+                        <NavLink to="/detailPage">Detail Page</NavLink>
+                        <button onClick={() => deleteCity(state.city.name)}>Delete city</button>
+                    </div>
                 </div>
-                <div>
-                    <NavLink to="/detailPage">Detail Page</NavLink>
-                    <button onClick={() => deleteCity(state.city.name)}>Delete city</button>
-                </div>
-
-            </div>
         </div>
     )
 }

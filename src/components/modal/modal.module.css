@@ -32,19 +32,19 @@
 .containerMainTemp{
     background-color: #fffaf1;
     width: 400px;
-    padding: 5%;
+    padding: 1.5%;
     border-radius: 20px;
 }
 
 .containerMainTemp1{
     background-color: #f1f2ff;
     width: 400px;
-    padding: 5%;
+    padding: 1.5%;
     border-radius: 20px;
 }
 
 
-.containerFooter{
+.containerMain{
     display: flex;
     align-items: baseline;
     flex-direction: row;
@@ -63,6 +63,37 @@
     color: #c5c5c5;
 }
 
-.containerFooter span{
+.containerMain span{
     color:#4da0ea;
+}
+
+.chart{
+    margin-left: -40px;
+}
+
+.containerFooter{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 2% 0;
+}
+
+.containerFooter button{
+    background-color: #459de9;
+    color: #fff;
+    font-size: 16px;
+    padding: 11.5px;
+    border-radius: 5px;
+    outline:none;
+  border:none;
+  cursor: pointer;
+}
+.containerFooter a{
+    background-color: #459de9;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
 }
