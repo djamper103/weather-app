@@ -6,10 +6,10 @@ import { IconContext } from "react-icons";
 import style from './weatherSky.module.css'
 
 
-export default function WeatherSky({state}) {
+export default function WeatherSky({state,type}) {
 
     return (
-        <div className={style.container}>
+        <div className={type==="detailPage"?style.containerDatailPage:style.container}>
                                     {
                                         state.list[0].weather[0].main==="Clear"?
                                         <IconContext.Provider value={{ color: "#ffd55c",size:"1.5em" }}>

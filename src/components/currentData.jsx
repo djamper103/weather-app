@@ -12,56 +12,73 @@ export default function Currentdata() {
 
     const [state, setState] = useState([])
     const [cityName, setCityName] = useState("")
-    const [cityNameAll, setCityNameAll] = useState(['kiev', 'tokyo', 'berlin', 'london', 'beijing'])
+    const [cityNameAll, setCityNameAll] = useState()
 
 
     const { latitude, longitude, error } = usePosition();
     
 
+    // useEffect(() => {
+    //     if (latitude && longitude && !error) {
+    //         axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
+    //             .then(response => {
+    //                 if(cityNameAll.includes(response.data.city.name)===false){
+    //                     setCityNameAll([response.data.city.name.toLowerCase(),...cityNameAll])
+    //                     setState([response.data,...state])
+    //                 } 
+    //             })
+    //     }
+    // }, [latitude, longitude]);
+
+
+    //Default sity name
+    useEffect(()=>{
+        if(localStorage.getItem('cityNameAll')){
+            let localSityName=localStorage.getItem('cityNameAll').split(",")
+            setCityNameAll(localSityName)
+        }else{
+            localStorage.setItem('cityNameAll', ['kiev', 'tokyo', 'berlin', 'london', 'beijing'])
+        }    
+    },[])
+
     useEffect(() => {
-        if (latitude && longitude && !error) {
-            axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
-                .then(response => {
-                    if(cityNameAll.includes(response.data.city.name)===false){
-                        setCityNameAll([response.data.city.name.toLowerCase(),...cityNameAll])
-                        setState([response.data,...state])
-                    } 
+        if(cityNameAll){
+            let cityDataAll=[]
+            cityNameAll.forEach(el=>{
+                axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${el}&appid=${apiKey}`)
+                    .then(response => {
+                        cityDataAll.push(response.data)
                 })
-        }
-    }, [latitude, longitude]);
-
-
-    useEffect(() => {
-        let cityDataAll=[]
-        cityNameAll.forEach(el=>{
-            axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${el}&appid=${apiKey}`)
-                .then(response => {
-                    cityDataAll.push(response.data)
             })
-        })
-        setState(cityDataAll)
-    }, []);
+            setState(cityDataAll)
+        }
+    }, [cityNameAll]);
 
 
     const search = () => {
         let cityNameClean=cityName.replace(/\s/g, '').trim().toLowerCase()
         if (cityNameClean.length > 3 && cityNameAll.includes(cityNameClean)===false) {
-            axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityNameClean}&appid=${apiKey}`)
-                .then(response => {
-                    setCityNameAll([cityNameClean,...cityNameAll])
-                    setState([response.data,...state])
-                })
+                    let filteredCityName=[cityNameClean,...cityNameAll]
+                    debugger
+                    localStorage.setItem('cityNameAll',filteredCityName)
+                    setCityNameAll(filteredCityName)
         } else {
             console.log("Input city name")
         }
     }
 
-    console.log(cityNameAll,state)
+    let deleteCity=(currentName)=>{
+        let filteredCityName=cityNameAll.filter(el=>el!=currentName.toLowerCase())
+        localStorage.setItem('cityNameAll',filteredCityName)
+        setCityNameAll(filteredCityName)
+    }
+
+    console.log(cityNameAll,localStorage.getItem('cityNameAll'),state)
 
     return (
         <div>
                 <Input search={search} cityName={cityName} setCityName={setCityName} />
-                <Mapping state={state}/>
+                <Mapping state={state} deleteCity={deleteCity}/>
         </div>
     );
 }

@@ -11,11 +11,12 @@ import Modal from '../modal/modal';
 
 
 
-export default function Mapping({state}) {
+export default function Mapping({state,deleteCity}) {
 
     const [tempStatus,setTempStatus]=useState(false)
     const [modalActive,setModalActive]=useState(false)
     const [currentView,setCurrentView]=useState()
+
 
     return (
         <div className={style.container}>
@@ -50,7 +51,9 @@ export default function Mapping({state}) {
                 }
 
                 {
-                    modalActive?<Modal modalActive={modalActive} setModalActive={setModalActive} state={currentView}/>:null
+                    modalActive?<Modal modalActive={modalActive} setModalActive={setModalActive}
+                        state={currentView} deleteCity={deleteCity}/>
+                    :null
                 }
 
         </div>
