@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 2% 0;
+    margin: 1% 0;
 }
 
 .containerMainTemp{
@@ -15,7 +15,7 @@
 
 .containerMainTemp1{
     background-color: #f1f2ff;
-    width: 50vw;
+    width: 80vw;
     padding: 0 5% 1%;
     border-radius: 20px;
 }
@@ -26,8 +26,8 @@
     align-content: center;
     justify-content: center;
 }
-.header h3{
-    margin:5%  auto
+.container h3{
+    margin:5%  auto;
 }
 
 .currentWeather{
@@ -38,7 +38,7 @@
 }
 
 .chart{
-    width: 40vw;
+    width: 50vw;
     margin: 2% auto 0;
 }
 
@@ -59,3 +59,41 @@
     color:#4da0ea;
 }
 
+
+@media screen and (max-width: 1200px) {
+    .container h3{
+        font-size: 16px;
+    }
+    .chart{
+        width: 70vw;
+        margin-left: 3%;
+    }
+}
+
+@media screen and (max-width: 800px) { 
+    .container h3{
+        font-size: 12px;
+    }
+    .chart{
+        width: 70vw;
+        margin-left: 3%;
+    }
+}
+
+@media screen and (max-width: 600px) { 
+    .chart{
+        width: 90vw;
+        margin-left: -11%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .container h3{
+        font-size: 11px;
+    }
+
+    .chart{
+        width: 90vw;
+        margin-left: -13%;
+    }
+}

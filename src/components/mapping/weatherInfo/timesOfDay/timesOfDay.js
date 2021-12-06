@@ -9,7 +9,7 @@ export default function TimesOfDay({state,type}) {
         <div>
             {state.list[0].sys.pod.includes('d')?
             <div className={type==='modal'?style.containerModal:style.container}>
-                <IconContext.Provider value={{ color: "#ffd55c",size:"1em" }}>
+                <IconContext.Provider value={{ color: "#ffd55c",size:type==='detailPage'?'2em':'1em'  }}>
                     <FaSun/>
                 </IconContext.Provider>
                 <div className={style.containerMain}>
@@ -19,7 +19,7 @@ export default function TimesOfDay({state,type}) {
             </div>
             :
             <div className={type==='modal'?style.containerModal:style.container}>
-                <IconContext.Provider value={{ color: "#1971bd",size:"1em" }}>
+                <IconContext.Provider value={{ color: "#1971bd",size:type==='detailPage'?'2em':'1em' }}>
                     <GiNightSleep/>
                 </IconContext.Provider>
                 <div className={style.containerMain}>

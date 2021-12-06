@@ -1564,12 +1564,12 @@ export default function DetailPage() {
                     </div>
                 </div>
                 <div className={style.currentWeather}>
-                        <CityName state={state} />
+                        <CityName state={state} type={'detailPage'}/>
                         <WeatherSky state={state} type={'detailPage'}/>
-                        <TimesOfDay state={state} />
-                            <Widn state={state} />
-                            <Humidity state={state} />
-                            <Pressure state={state} />
+                        <TimesOfDay state={state} type={'detailPage'}/>
+                            <Widn state={state} type={'detailPage'}/>
+                            <Humidity state={state} type={'detailPage'}/>
+                            <Pressure state={state} type={'detailPage'}/>
                 </div>
                 <h3>Weather forecast for 7 days </h3>
                 <div className={style.chart}>

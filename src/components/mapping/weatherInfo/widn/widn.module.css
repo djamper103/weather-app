@@ -1,7 +1,6 @@
 .container{
     display: flex;
     align-items: center;
-    width: 5vw;
     margin-bottom: 1vh;
 }
 
@@ -10,4 +9,22 @@
     flex-direction: column;
     align-items: flex-start;
     margin-left: 0.5vw;
+}
+
+@media screen and (max-width: 1200px) {
+    .container{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 800px) {  
+    .container{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .container{
+        font-size: 12px;
+    }
 }

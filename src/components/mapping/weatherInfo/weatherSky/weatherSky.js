@@ -12,19 +12,24 @@ export default function WeatherSky({state,type}) {
         <div className={type==="detailPage"?style.containerDatailPage:style.container}>
                                     {
                                         state.list[0].weather[0].main==="Clear"?
-                                        <IconContext.Provider value={{ color: "#ffd55c",size:"1.5em" }}>
-                                                <FaSun/>
-                                                <div>{"Sunny"}</div>
-                                        </IconContext.Provider> 
+                                        <div>
+                                            <IconContext.Provider value={{ color: "#ffd55c",size:"2em" }}>
+                                                    <FaSun/>
+                                            </IconContext.Provider>
+                                            <div>{"Sunny"}</div>
+                                        </div>
                                         :
-                                        <IconContext.Provider value={{ color: "#459de9",size:"1.5em" }}>
-                                                {
-                                                    state.list[0].weather[0].main==="Snow"?<BsFillCloudSnowFill/>
-                                                    :state.list[0].weather[0].main==="Rain"?<BsFillCloudRainHeavyFill/>
-                                                    :<AiFillCloud/>
-                                                }
-                                                <div >{state.list[0].weather[0].main}</div>
-                                        </IconContext.Provider>
+                                        <div>
+                                            <IconContext.Provider value={{ color: "#459de9",size:"2em" }}>
+                                                    {
+                                                        state.list[0].weather[0].main==="Snow"?<BsFillCloudSnowFill/>
+                                                        :state.list[0].weather[0].main==="Rain"?<BsFillCloudRainHeavyFill/>
+                                                        :<AiFillCloud/>
+                                                    }
+                                                    
+                                            </IconContext.Provider>
+                                            <div >{state.list[0].weather[0].main}</div>
+                                        </div>
                                     }
                             </div>
     )
