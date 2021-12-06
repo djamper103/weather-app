@@ -8,6 +8,8 @@ import WeatherSky from '../mapping/weatherInfo/weatherSky/weatherSky'
 import Widn from '../mapping/weatherInfo/widn/widn'
 import style from './detailPage.module.css'
 import { NavLink } from "react-router-dom";
+import { IconContext } from "react-icons";
+import {AiFillHome} from "react-icons/all";
 
 
 const state = {
@@ -1551,7 +1553,16 @@ export default function DetailPage() {
     return (
         <div className={style.container}>
             <div className={Math.trunc(state.list[0].main.temp - 273.15) > 0 ? style.containerMainTemp : style.containerMainTemp1}>
-                <h3>Current weather</h3>
+                <div className={style.header}>
+                    <h3>Current weather</h3>
+                    <div>
+                        <NavLink to="/">
+                            <IconContext.Provider value={{ color: "#1971bd",size:"1.6em"}}>
+                                <AiFillHome/>
+                            </IconContext.Provider>
+                        </NavLink>
+                    </div>
+                </div>
                 <div className={style.currentWeather}>
                         <CityName state={state} />
                         <WeatherSky state={state} type={'detailPage'}/>
@@ -1560,13 +1571,10 @@ export default function DetailPage() {
                             <Humidity state={state} />
                             <Pressure state={state} />
                 </div>
+                <h3>Weather forecast for 7 days </h3>
                 <div className={style.chart}>
                     <Charts state={state} type={'detailPage'} />
                 </div>
-            </div>
-
-            <div>
-                <NavLink to="/">Home</NavLink>
             </div>
         </div>
     )
