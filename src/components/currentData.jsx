@@ -41,7 +41,7 @@ export default function Currentdata() {
         }    
     },[])
 
-    useEffect(() => {
+    useEffect(() => {   
         if(cityNameAll){
             let cityDataAll=[]
             cityNameAll.forEach(el=>{
