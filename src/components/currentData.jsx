@@ -41,25 +41,23 @@ export default function Currentdata() {
         }    
     },[])
 
-    useEffect(() => {   
+    useEffect( async () => {   
         if(cityNameAll){
             let cityDataAll=[]
-            cityNameAll.forEach(el=>{
-                axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${el}&appid=${apiKey}`)
-                    .then(response => {
-                        cityDataAll.push(response.data)
+            for(const name of cityNameAll){
+                await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${name}&appid=${apiKey}`)
+                .then(response => {
+                    cityDataAll.push(response.data)
                 })
-            })
+            }
             setState(cityDataAll)
         }
     }, [cityNameAll]);
-
 
     const search = () => {
         let cityNameClean=cityName.replace(/\s/g, '').trim().toLowerCase()
         if (cityNameClean.length > 3 && cityNameAll.includes(cityNameClean)===false) {
                     let filteredCityName=[cityNameClean,...cityNameAll]
-                    debugger
                     localStorage.setItem('cityNameAll',filteredCityName)
                     setCityNameAll(filteredCityName)
         } else {
@@ -73,7 +71,8 @@ export default function Currentdata() {
         setCityNameAll(filteredCityName)
     }
 
-    console.log(cityNameAll,localStorage.getItem('cityNameAll'),state)
+    // console.log(state)
+    // debugger
 
     return (
         <div>
