@@ -6,6 +6,7 @@ export default function Charts({state,type}) {
 
     const [data,setData]=useState()
 
+
     useEffect(()=>{
         let newData=[]
         state.list.forEach((el,index) => {
@@ -16,10 +17,10 @@ export default function Charts({state,type}) {
               }
               newData.push(a)
           }else{
-            if(index%4===0){
+            if(index<=6){
               let a={
                   temp:Math.trunc(el.main.temp - 273.15),
-                  time:el.dt_txt.slice(5, 11).replace("-","."),
+                  time:el.dt_txt.slice(11, 16).replace("-","."),
               }
               newData.push(a)
           }

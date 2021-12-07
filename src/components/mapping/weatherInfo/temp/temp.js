@@ -13,9 +13,8 @@ export default function Temp({state,tempStatus,setTempStatus}) {
             </div>
 
             <div className={style.feelsLike}>
-                <div style={{marginRight:"5%"}}>Feels like:</div>
-                <div>{tempStatus?Math.trunc((state.list[0].main.feels_like*(9/5)) - 459,67):Math.trunc(state.list[0].main.feels_like - 273.15)} {tempStatus?"°F":"°C"}
-                </div>
+                Feels like: {tempStatus?Math.trunc((state.list[0].main.feels_like*(9/5)) - 459,67):Math.trunc(state.list[0].main.feels_like - 273.15)} {tempStatus?"°F":"°C"}
+                
             </div>
         </div>
     )

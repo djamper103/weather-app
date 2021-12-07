@@ -86,8 +86,8 @@
     padding: 11.5px;
     border-radius: 5px;
     outline:none;
-  border:none;
-  cursor: pointer;
+    border:none;
+    cursor: pointer;
 }
 .containerFooter a{
     background-color: #459de9;
@@ -96,4 +96,20 @@
     padding: 10px;
     border-radius: 5px;
     text-decoration: none;
+}
+
+@media screen and (max-width: 500px) {
+    .containerMainTemp{
+        background-color: #fffaf1;
+        width: 300px;
+        padding: 1.5%;
+        border-radius: 20px;
+    }
+    
+    .containerMainTemp1{
+        background-color: #f1f2ff;
+        width: 300px;
+        padding: 1.5%;
+        border-radius: 20px;
+    }
 }

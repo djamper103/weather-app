@@ -6,7 +6,7 @@ import style from './humidity.module.css'
 
 export default function Humidity({state,type}) {
     return (
-            <div className={style.container}>
+            <div className={type==='detailPage'?style.containerDetailPage:style.container}>
                 <IconContext.Provider value={{ color: "#1971bd",size:type==='detailPage'?'2em':'1.4em'}}>
                     <WiHumidity/>
                 </IconContext.Provider>

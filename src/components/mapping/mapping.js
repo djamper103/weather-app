@@ -28,7 +28,7 @@ export default function Mapping({state,deleteCity}) {
                                 setCurrentView(el)
                                 setModalActive(true)
                             }}>
-                                <div style={{display:"flex",marginBottom:"5%",justifyContent:"space-between"}}>
+                                <div style={{display:"flex",marginBottom:"2%",justifyContent:"space-between"}}>
                                     <CityName state={el}/>
 
                                     <WeatherSky state={el}/>

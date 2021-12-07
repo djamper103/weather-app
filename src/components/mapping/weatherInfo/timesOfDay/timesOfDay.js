@@ -6,7 +6,7 @@ import style from './timeOfDay.module.css'
 
 export default function TimesOfDay({state,type}) {
     return(
-        <div>
+        <div className={type==='detailPage'?style.containerDetailPage:null}>
             {state.list[0].sys.pod.includes('d')?
             <div className={type==='modal'?style.containerModal:style.container}>
                 <IconContext.Provider value={{ color: "#ffd55c",size:type==='detailPage'?'2em':'1em'  }}>

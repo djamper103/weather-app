@@ -4,6 +4,22 @@
     align-Items:flex-start;
 }
 
+.containerDetailPage{
+    display:flex;
+    flex-Direction:column;
+    align-Items:flex-start;
+    margin-right: 3vw;
+}
+
+.cityNameDetailPage{
+    margin-bottom: 4%;
+    font-size: 20px;
+}
+
+.dateDetailPage{
+    font-size: 16px;
+}
+
 .cityName{
     margin-bottom: 4%;
     font-size: 20px;
@@ -21,9 +37,39 @@
     .date{
         font-size: 14px;
     }
+
+    .cityNameDetailPage{
+        font-size: 16px;
+    }
+    
+    .dateDetailPage{
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 800px) {
+    .cityName{
+        font-size: 16px;
+    }
+    
+    .date{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .containerDetailPage{
+        margin: 0 3vw;
+    }
+
+    .cityNameDetailPage{
+        font-size: 14px;
+    }
+    
+    .dateDetailPage{
+        font-size: 12px;
+    }
+
     .cityName{
         font-size: 14px;
     }
@@ -31,24 +77,16 @@
     .date{
         font-size: 12px;
     }
-}
 
-@media screen and (max-width: 600px) {
-    .cityName{
-        font-size: 10px;
-    }
-    
-    .date{
-        font-size: 10px;
-    }
+
 }
 
 @media screen and (max-width: 400px) {
     .cityName{
-        font-size: 8px;
+        font-size: 12px;
     }
     
     .date{
-        font-size: 8px;
+        font-size: 10px;
     }
 }
