@@ -1,21 +1,58 @@
 import React, { useEffect, useState } from "react"
-import axios from "axios"
 import { usePosition } from 'use-position';
 import Input from "./input/input";
 import Mapping from "./mapping/mapping";
-
-
-const apiKey = "82207646ff9e6f42932e9fc60a8799e6"
+import { useTypesSelector } from "../hooks/useTypeSelector";
+import { useActions } from "../hooks/useActions";
 
 
 export default function Currentdata() {
 
-    const [state, setState] = useState([])
-    const [cityName, setCityName] = useState("")
-    const [cityNameAll, setCityNameAll] = useState()
+    const {cityNameAll}=useTypesSelector(state => state.cityName)
 
 
-    const { latitude, longitude, error } = usePosition();
+    const {cityNameDefault}=useActions()
+
+    const {deleteCityName}=useActions()
+
+    const {cityDataFetch}=useActions()
+
+
+    //Default sity name
+    useEffect(()=>{
+        if(localStorage.getItem('cityNameAll')){
+            let localSityName=localStorage.getItem('cityNameAll').split(",")
+            cityNameDefault(localSityName)
+        }else{
+            localStorage.setItem('cityNameAll', ['kyiv','tokyo', 'berlin', 'london', 'beijing'])
+        }
+    },[])
+
+    //Data fetch
+    useEffect( async () => {  
+        if(cityNameAll){
+            cityDataFetch(cityNameAll)
+        }
+    }, [cityNameAll]);
+
+
+    let deleteCity=(currentName)=>{
+        let filteredCityName=cityNameAll.filter(el=>el!=currentName.toLowerCase())
+        localStorage.setItem('cityNameAll',filteredCityName)
+        deleteCityName(currentName)
+    }
+
+
+    return (
+        <div>
+                <Input/>
+                <Mapping deleteCity={deleteCity}/>
+        </div>
+    );
+}
+
+
+    // const { latitude, longitude, error } = usePosition();
     
 
     // useEffect(() => {
@@ -29,55 +66,3 @@ export default function Currentdata() {
     //             })
     //     }
     // }, [latitude, longitude]);
-
-
-    //Default sity name
-    useEffect(()=>{
-        if(localStorage.getItem('cityNameAll')){
-            let localSityName=localStorage.getItem('cityNameAll').split(",")
-            setCityNameAll(localSityName)
-        }else{
-            localStorage.setItem('cityNameAll', ['kiev', 'tokyo', 'berlin', 'london', 'beijing'])
-        }    
-    },[])
-
-    useEffect( async () => {   
-        if(cityNameAll){
-            let cityDataAll=[]
-            for(const name of cityNameAll){
-                await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${name}&appid=${apiKey}`)
-                .then(response => {
-                    cityDataAll.push(response.data)
-                })
-            }
-            setState(cityDataAll)
-        }
-    }, [cityNameAll]);
-
-    const search = () => {
-        let cityNameClean=cityName.replace(/\s/g, '').trim().toLowerCase()
-        if (cityNameClean.length > 3 && cityNameAll.includes(cityNameClean)===false) {
-                    let filteredCityName=[cityNameClean,...cityNameAll]
-                    localStorage.setItem('cityNameAll',filteredCityName)
-                    setCityNameAll(filteredCityName)
-        } else {
-            console.log("Input city name")
-        }
-    }
-
-    let deleteCity=(currentName)=>{
-        let filteredCityName=cityNameAll.filter(el=>el!=currentName.toLowerCase())
-        localStorage.setItem('cityNameAll',filteredCityName)
-        setCityNameAll(filteredCityName)
-    }
-
-    // console.log(state)
-    // debugger
-
-    return (
-        <div>
-                <Input search={search} cityName={cityName} setCityName={setCityName} />
-                <Mapping state={state} deleteCity={deleteCity}/>
-        </div>
-    );
-}

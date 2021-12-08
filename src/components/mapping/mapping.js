@@ -11,7 +11,10 @@ import Modal from '../modal/modal';
 
 
 
-export default function Mapping({state,deleteCity}) {
+export default function Mapping() {
+
+
+    const {cityData}=useTypesSelector(state=>state.cityData)
 
     const [tempStatus,setTempStatus]=useState(false)
     const [modalActive,setModalActive]=useState(false)
@@ -21,7 +24,7 @@ export default function Mapping({state,deleteCity}) {
     return (
         <div className={style.container}>
             {
-                    state ? state.map((el,index) => {
+                cityData ? cityData.map((el,index) => {
                         return(
                             <div key={el.city.name} className={Math.trunc(el.list[0].main.temp - 273.15)>0?style.containerMain:style.containerMain1}
                             onClick={()=>{
@@ -52,7 +55,7 @@ export default function Mapping({state,deleteCity}) {
 
                 {
                     modalActive?<Modal modalActive={modalActive} setModalActive={setModalActive}
-                        state={currentView} deleteCity={deleteCity}/>
+                        state={currentView}/>
                     :null
                 }
 
