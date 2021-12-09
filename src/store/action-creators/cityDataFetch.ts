@@ -15,7 +15,6 @@ export const cityDataFetch=(payload: any[])=>{
                     cityDataAll.push(response.data)
                 })
             }
-            debugger
             dispatch({
                 type:CityDataActionTypes.FETCH_CITY_DATA,
                 payload:cityDataAll

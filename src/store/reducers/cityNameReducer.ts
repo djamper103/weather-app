@@ -2,8 +2,7 @@ import { CityNameActions, CityNameActionTypes, CityNameAllState } from "../types
 
 
 const initialState:CityNameAllState={
-    cityNameAll:[],
-    cityName:""
+    cityNameAll:[]
 }
 
 

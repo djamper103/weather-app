@@ -3,6 +3,8 @@ import * as cityNameDefault from "./cityName"
 import * as deleteCityName from "./cityName"
 import * as addCityName from "./cityName"
 import * as cityInput from "./cityNameInput"
+import * as modalActive from "./modalView"
+import * as modalCurrentView from "./modalView"
 
 
 export default {
@@ -10,5 +12,7 @@ export default {
     ...deleteCityName,
     ...addCityName,
     ...cityDataFetch,
-    ...cityInput
+    ...cityInput,
+    ...modalActive,
+    ...modalCurrentView
 }

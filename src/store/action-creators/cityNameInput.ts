@@ -2,7 +2,7 @@ import {Dispatch} from "redux"
 import { CityNameInputActions, InputNameActionTypes } from "../types/cityNameInput"
 
 
-export const cityNameInput=(payload: string)=>{
+export const cityInput=(payload: string)=>{
     return async (dispatch:Dispatch<CityNameInputActions>)=>{
         try{
             dispatch({

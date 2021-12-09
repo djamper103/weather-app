@@ -8,6 +8,8 @@ import Temp from './weatherInfo/temp/temp';
 import WeatherSky from './weatherInfo/weatherSky/weatherSky';
 import CityName from './weatherInfo/cityName/cityName';
 import Modal from '../modal/modal';
+import { useTypesSelector } from "../../hooks/useTypeSelector";
+import { useActions } from "../../hooks/useActions";
 
 
 
@@ -16,9 +18,11 @@ export default function Mapping() {
 
     const {cityData}=useTypesSelector(state=>state.cityData)
 
+    const {modalActive}=useActions()
+    const {modalCurrentView}=useActions()
+
     const [tempStatus,setTempStatus]=useState(false)
-    const [modalActive,setModalActive]=useState(false)
-    const [currentView,setCurrentView]=useState()
+
 
 
     return (
@@ -28,8 +32,9 @@ export default function Mapping() {
                         return(
                             <div key={el.city.name} className={Math.trunc(el.list[0].main.temp - 273.15)>0?style.containerMain:style.containerMain1}
                             onClick={()=>{
-                                setCurrentView(el)
-                                setModalActive(true)
+                                modalCurrentView(el)
+                                debugger
+                                modalActive(true)
                             }}>
                                 <div style={{display:"flex",marginBottom:"2%",justifyContent:"space-between"}}>
                                     <CityName state={el}/>
@@ -54,8 +59,7 @@ export default function Mapping() {
                 }
 
                 {
-                    modalActive?<Modal modalActive={modalActive} setModalActive={setModalActive}
-                        state={currentView}/>
+                    modalActive?<Modal />
                     :null
                 }
 

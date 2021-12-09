@@ -19,6 +19,7 @@ export default function Input() {
                     let filteredCityName=[cityNameClean,...cityNameAll]
                     localStorage.setItem('cityNameAll',filteredCityName)
                     addCityName(filteredCityName)
+                    cityInput("")
         } else {
             console.log("Input city name")
         }
