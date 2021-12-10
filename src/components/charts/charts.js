@@ -13,7 +13,7 @@ export default function Charts() {
 
   useEffect(() => {
     let newData = []
-    modalCurrentView.stateView.list.forEach((el, index) => {
+    modalCurrentView.list.forEach((el, index) => {
       if (modalViewType === "detailPage") {
         let a = {
           temp: Math.trunc(el.main.temp - 273.15),

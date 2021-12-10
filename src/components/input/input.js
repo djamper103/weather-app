@@ -6,20 +6,19 @@ import { useActions } from "../../hooks/useActions";
 
 export default function Input() {
 
+    const { cityNameInput } = useTypesSelector(state => state.cityNameInput)
+    const { cityNameAll } = useTypesSelector(state => state.cityName)
 
-    const {cityNameInput}=useTypesSelector(state=>state.cityNameInput)
-    const {cityNameAll}=useTypesSelector(state => state.cityName)
-
-    const {addCityName}=useActions()
-    const {cityInput}=useActions()
+    const { addCityName } = useActions()
+    const { cityInput } = useActions()
 
     const search = () => {
-        let cityNameClean=cityNameInput.replace(/\s/g, '').trim().toLowerCase()
-        if (cityNameClean.length > 3 && cityNameAll.includes(cityNameClean)===false) {
-                    let filteredCityName=[cityNameClean,...cityNameAll]
-                    localStorage.setItem('cityNameAll',filteredCityName)
-                    addCityName(filteredCityName)
-                    cityInput("")
+        let cityNameClean = cityNameInput.replace(/\s/g, '').trim().toLowerCase()
+        if (cityNameClean.length > 3 && cityNameAll.includes(cityNameClean) === false) {
+            let filteredCityName = [cityNameClean, ...cityNameAll]
+            localStorage.setItem('cityNameAll', filteredCityName)
+            addCityName(filteredCityName)
+            cityInput("")
         } else {
             console.log("Input city name")
         }
@@ -32,7 +31,7 @@ export default function Input() {
             </div>
 
             <div className={style.inputButton}>
-                <button onClick={()=>search()}>Search</button>
+                <button onClick={() => search()}>Search</button>
             </div>
         </div>
     )

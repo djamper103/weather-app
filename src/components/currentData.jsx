@@ -10,11 +10,8 @@ export default function Currentdata() {
 
     const {cityNameAll}=useTypesSelector(state => state.cityName)
 
-
     const {cityNameDefault}=useActions()
-
     const {cityDataFetch}=useActions()
-
 
     //Default sity name
     useEffect(()=>{

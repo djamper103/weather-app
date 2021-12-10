@@ -18,7 +18,6 @@ export default function Modal() {
     const { modalIsActive } = useTypesSelector(modalCurrentView => modalCurrentView.modalView)
     const { cityNameAll } = useTypesSelector(state => state.cityName)
 
-
     const { modalActive } = useActions()
     const { modalCurrentViewActionCreators } = useActions()
     const { deleteCityName } = useActions()
@@ -37,7 +36,7 @@ export default function Modal() {
 
     return (
         <div className={modalIsActive ? style.containerActive : style.container} onClick={() => modalActive(false)}>
-            <div key={modalCurrentView.stateView.city.name} className={Math.trunc(modalCurrentView.stateView.list[0].main.temp - 273.15) > 0 ? style.containerMainTemp : style.containerMainTemp1}
+            <div key={modalCurrentView.city.name} className={Math.trunc(modalCurrentView.list[0].main.temp - 273.15) > 0 ? style.containerMainTemp : style.containerMainTemp1}
                 onClick={(e) => e.stopPropagation()}>
                 <div style={{ display: "flex", marginBottom: "5%", justifyContent: "space-between" }}>
                     <CityName />
@@ -55,14 +54,11 @@ export default function Modal() {
                     <Pressure />
                 </div>
                 <div className={style.containerFooter}>
-                    <NavLink to="/detailPage" onClick={() => modalCurrentViewActionCreators({
-                        stateView: modalCurrentView.stateView,
-                        typeView: "detailPage"
-                    })}
+                    <NavLink to="/detailPage" onClick={() => modalCurrentViewActionCreators(modalCurrentView, "detailPage")}
                     >
                         Detail Page
                     </NavLink>
-                    <button onClick={() => deleteCity(modalCurrentView.stateView.city.name)}>Delete city</button>
+                    <button onClick={() => deleteCity(modalCurrentView.city.name)}>Delete city</button>
                 </div>
             </div>
         </div>

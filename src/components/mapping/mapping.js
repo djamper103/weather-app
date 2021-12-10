@@ -12,18 +12,13 @@ import { useTypesSelector } from "../../hooks/useTypeSelector";
 import { useActions } from "../../hooks/useActions";
 
 
-
 export default function Mapping() {
-
 
     const { cityData } = useTypesSelector(state => state.cityData)
     const { modalIsActive } = useTypesSelector(state => state.modalView)
 
     const { modalActive } = useActions()
     const { modalCurrentViewActionCreators } = useActions()
-
-    const [tempStatus, setTempStatus] = useState(false)
-
 
 
     return (
@@ -33,7 +28,7 @@ export default function Mapping() {
                     return (
                         <div key={el.city.name} className={Math.trunc(el.list[0].main.temp - 273.15) > 0 ? style.containerMain : style.containerMain1}
                             onClick={() => {
-                                modalCurrentViewActionCreators({ stateView: el, typeView: "modal" })
+                                modalCurrentViewActionCreators(el, "modal")
                                 modalActive(true)
                             }}>
                             <div style={{ display: "flex", marginBottom: "2%", justifyContent: "space-between" }}>
@@ -43,7 +38,7 @@ export default function Mapping() {
                             </div>
 
                             <div className={style.containerFooter}>
-                                <Temp state={el} tempStatus={tempStatus} setTempStatus={setTempStatus} />
+                                <Temp state={el} />
                                 <div className={style.containerWeatherInfo}>
                                     <TimesOfDay state={el} />
                                     <Widn state={el} />

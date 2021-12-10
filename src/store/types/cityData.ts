@@ -1,15 +1,15 @@
-export enum CityDataActionTypes{
-    FETCH_CITY_DATA="FETCH_CITY_DATA",
+export enum CityDataActionTypes {
+    FETCH_CITY_DATA = "FETCH_CITY_DATA",
 }
 
-interface CityDataAction{
-    type:CityDataActionTypes.FETCH_CITY_DATA;
-    payload:any[];
+interface CityDataAction {
+    type: CityDataActionTypes.FETCH_CITY_DATA;
+    payload: any[];
 }
 
 
-export type CityDataActions=CityDataAction
+export type CityDataActions = CityDataAction
 
-export interface CityDataState{
-    cityData:any[]
+export interface CityDataState {
+    cityData: any[]
 }

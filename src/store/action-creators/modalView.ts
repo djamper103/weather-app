@@ -1,30 +1,30 @@
-import {Dispatch} from "redux"
+import { Dispatch } from "redux"
 import { ModalViewActions, ModalViewActionTypes } from "../types/modalData"
 
 
-export const modalActive=(payload: boolean)=>{
-    return async (dispatch:Dispatch<ModalViewActions>)=>{
-        try{
+export const modalActive = (payload: boolean) => {
+    return async (dispatch: Dispatch<ModalViewActions>) => {
+        try {
             dispatch({
-                type:ModalViewActionTypes.MODAL_ACTIVE,
-                payload:payload
+                type: ModalViewActionTypes.MODAL_ACTIVE,
+                payload: payload
             })
-        }catch(e){
+        } catch (e) {
 
         }
     }
 }
 
 
-export const modalCurrentViewActionCreators=(stateView:Object,typeView:string)=>{
-    return async (dispatch:Dispatch<ModalViewActions>)=>{
-        try{
+export const modalCurrentViewActionCreators = (stateView: Object, typeView: string) => {
+    return async (dispatch: Dispatch<ModalViewActions>) => {
+        try {
             dispatch({
-                type:ModalViewActionTypes.CURRENT_VIEW,
+                type: ModalViewActionTypes.CURRENT_VIEW,
                 stateView,
                 typeView
             })
-        }catch(e){
+        } catch (e) {
 
         }
     }

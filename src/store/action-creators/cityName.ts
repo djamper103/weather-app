@@ -1,41 +1,41 @@
-import { CityNameActionTypes,CityNameActions } from "../types/cityName"
-import {Dispatch} from "redux"
+import { CityNameActionTypes, CityNameActions } from "../types/cityName"
+import { Dispatch } from "redux"
 
 
-export const cityNameDefault=(payload: any[])=>{
-    return async (dispatch:Dispatch<CityNameActions>)=>{
-        try{
+export const cityNameDefault = (payload: any[]) => {
+    return async (dispatch: Dispatch<CityNameActions>) => {
+        try {
             dispatch({
-                type:CityNameActionTypes.DEFAULT_CITY_NAME,
-                payload:payload
+                type: CityNameActionTypes.DEFAULT_CITY_NAME,
+                payload: payload
             })
-        }catch(e){
+        } catch (e) {
 
         }
     }
 }
 
-export const deleteCityName=(payload: "")=>{
-    return async (dispatch:Dispatch<CityNameActions>)=>{
-        try{
+export const deleteCityName = (payload: "") => {
+    return async (dispatch: Dispatch<CityNameActions>) => {
+        try {
             dispatch({
-                type:CityNameActionTypes.DELETE_CITY_NAME,
-                payload:payload
+                type: CityNameActionTypes.DELETE_CITY_NAME,
+                payload: payload
             })
-        }catch(e){
-            
+        } catch (e) {
+
         }
     }
 }
 
-export const addCityName=(payload: any[])=>{
-    return async (dispatch:Dispatch<CityNameActions>)=>{
-        try{
+export const addCityName = (payload: any[]) => {
+    return async (dispatch: Dispatch<CityNameActions>) => {
+        try {
             dispatch({
-                type:CityNameActionTypes.ADD_CITY_NAME,
-                payload:payload
+                type: CityNameActionTypes.ADD_CITY_NAME,
+                payload: payload
             })
-        }catch(e){
+        } catch (e) {
 
         }
     }

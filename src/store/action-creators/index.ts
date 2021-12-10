@@ -5,6 +5,8 @@ import * as addCityName from "./cityName"
 import * as cityInput from "./cityNameInput"
 import * as modalActive from "./modalView"
 import * as modalCurrentViewActionCreators from "./modalView"
+import * as tempStatusActionCreator from "./tempStatus"
+
 
 
 export default {
@@ -14,5 +16,6 @@ export default {
     ...cityDataFetch,
     ...cityInput,
     ...modalActive,
-    ...modalCurrentViewActionCreators
+    ...modalCurrentViewActionCreators,
+    ...tempStatusActionCreator
 }
