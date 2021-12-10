@@ -1,17 +1,20 @@
 import React from 'react'
-import {FaSun,AiFillCloud,BsFillCloudSnowFill,BsFillCloudRainHeavyFill,
-}
-from "react-icons/all";
+import {FaSun,AiFillCloud,BsFillCloudSnowFill,BsFillCloudRainHeavyFill} from "react-icons/all";
 import { IconContext } from "react-icons";
 import style from './weatherSky.module.css'
+import { useTypesSelector } from "../../../../hooks/useTypeSelector";
 
 
-export default function WeatherSky({state,type}) {
+export default function WeatherSky({state}) {
+
+    const {modalCurrentView}=useTypesSelector(modalCurrentView=>modalCurrentView.modalView)
+    const {modalViewType}=useTypesSelector(modalCurrentView=>modalCurrentView.modalView)
+
 
     return (
-        <div className={type==="detailPage"?style.containerDatailPage:style.container}>
+        <div className={modalViewType==="detailPage"?style.containerDatailPage:style.container}>
                                     {
-                                        state.list[0].weather[0].main==="Clear"?
+                                        (state?state:modalCurrentView.stateView).list[0].weather[0].main==="Clear"?
                                         <div>
                                             <IconContext.Provider value={{ color: "#ffd55c",size:"2em" }}>
                                                     <FaSun/>
@@ -22,13 +25,13 @@ export default function WeatherSky({state,type}) {
                                         <div>
                                             <IconContext.Provider value={{ color: "#459de9",size:"2em" }}>
                                                     {
-                                                        state.list[0].weather[0].main==="Snow"?<BsFillCloudSnowFill/>
-                                                        :state.list[0].weather[0].main==="Rain"?<BsFillCloudRainHeavyFill/>
+                                                        (state?state:modalCurrentView.stateView).list[0].weather[0].main==="Snow"?<BsFillCloudSnowFill/>
+                                                        :(state?state:modalCurrentView.stateView).list[0].weather[0].main==="Rain"?<BsFillCloudRainHeavyFill/>
                                                         :<AiFillCloud/>
                                                     }
                                                     
                                             </IconContext.Provider>
-                                            <div >{state.list[0].weather[0].main}</div>
+                                            <div >{(state?state:modalCurrentView.stateView).list[0].weather[0].main}</div>
                                         </div>
                                     }
                             </div>

@@ -1,21 +1,26 @@
 import React from 'react'
 import style from './cityName.module.css'
+import { useTypesSelector } from "../../../../hooks/useTypeSelector";
 
 
-export default function CityName({ state,type }) {
+
+export default function CityName({state}) {
 
     let options = { weekday: 'short' }
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+    const {modalCurrentView}=useTypesSelector(modalCurrentView=>modalCurrentView.modalView)
+    const {modalViewType}=useTypesSelector(modalCurrentView=>modalCurrentView.modalView)
+
     return (
-        <div className={type==='detailPage'?style.containerDetailPage:style.container}>
-            <div className={type==='detailPage'?style.cityNameDetailPage:style.cityName}>
-                {state.city.name} {state.city.country}
+        <div className={modalViewType==='detailPage'?style.containerDetailPage:style.container}>
+            <div className={modalViewType==='detailPage'?style.cityNameDetailPage:style.cityName}>
+                {(state?state:modalCurrentView.stateView).city.name} {(state?state:modalCurrentView.stateView).city.country}
             </div>
-            <div className={type==='detailPage'?style.dateDetailPage:style.date}>
-                {new Intl.DateTimeFormat('en-US', options).format(new Date(state.list[0].dt_txt.split("-").join(".")).getDay())},
-                {months[(new Date(state.list[0].dt_txt.split("-").join(".")).getMonth())]},
-                {state.list[0].dt_txt.slice(11, 16)}
+            <div className={modalViewType==='detailPage'?style.dateDetailPage:style.date}>
+                {new Intl.DateTimeFormat('en-US', options).format(new Date((state?state:modalCurrentView.stateView).list[0].dt_txt.split("-").join(".")).getDay())},
+                {months[(new Date((state?state:modalCurrentView.stateView).list[0].dt_txt.split("-").join(".")).getMonth())]},
+                {(state?state:modalCurrentView.stateView).list[0].dt_txt.slice(11, 16)}
             </div>
         </div>
     )

@@ -10,6 +10,7 @@ import style from './detailPage.module.css'
 import { NavLink } from "react-router-dom";
 import { IconContext } from "react-icons";
 import {AiFillHome} from "react-icons/all";
+import { useTypesSelector } from "../../hooks/useTypeSelector";
 
 
 const state = {
@@ -1550,9 +1551,11 @@ const state = {
 
 export default function DetailPage() {
 
+    const { modalCurrentView } = useTypesSelector(modalCurrentView => modalCurrentView.modalView)
+
     return (
         <div className={style.container}>
-            <div className={Math.trunc(state.list[0].main.temp - 273.15) > 0 ? style.containerMainTemp : style.containerMainTemp1}>
+            <div className={Math.trunc(modalCurrentView.stateView.list[0].main.temp - 273.15) > 0 ? style.containerMainTemp : style.containerMainTemp1}>
                 <div className={style.header}>
                     <h3>Current weather</h3>
                     <div>
@@ -1564,16 +1567,16 @@ export default function DetailPage() {
                     </div>
                 </div>
                 <div className={style.currentWeather}>
-                        <CityName state={state} type={'detailPage'}/>
-                        <WeatherSky state={state} type={'detailPage'}/>
-                        <TimesOfDay state={state} type={'detailPage'}/>
-                            <Widn state={state} type={'detailPage'}/>
-                            <Humidity state={state} type={'detailPage'}/>
-                            <Pressure state={state} type={'detailPage'}/>
+                        <CityName />
+                        <WeatherSky />
+                        <TimesOfDay />
+                            <Widn />
+                            <Humidity />
+                            <Pressure />
                 </div>
                 <h3>Weather forecast for 7 days </h3>
                 <div className={style.chart}>
-                    <Charts state={state} type={'detailPage'} />
+                    <Charts  />
                 </div>
             </div>
         </div>
