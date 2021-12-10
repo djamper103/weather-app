@@ -12,7 +12,8 @@ import { NavLink } from "react-router-dom";
 
 export default function Modal({ state, modalActive, setModalActive,deleteCity }) {
 
-
+    console.log(state)
+debugger
     return (
         <div className={modalActive ? style.containerActive : style.container} onClick={() => setModalActive(false)}>
                 <div key={state.city.name} className={Math.trunc(state.list[0].main.temp - 273.15) > 0 ? style.containerMainTemp : style.containerMainTemp1}
