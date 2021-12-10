@@ -18,8 +18,11 @@ export default function Currentdata() {
         if(localStorage.getItem('cityNameAll')){
             let localSityName=localStorage.getItem('cityNameAll').split(",")
             cityNameDefault(localSityName)
+            cityDataFetch(localSityName)
         }else{
             localStorage.setItem('cityNameAll', ['kyiv','tokyo', 'berlin', 'london', 'beijing'])
+            let localSityName=localStorage.getItem('cityNameAll').split(",")
+            cityDataFetch(localSityName)
         }
     },[])
 
