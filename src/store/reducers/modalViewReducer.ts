@@ -8,8 +8,6 @@ const initialState: ModalViewState = {
 
 
 export const modalViewReducer = (state = initialState, action: ModalViewActions): ModalViewState => {
-    console.log(action)
-    debugger
     switch (action.type) {
         case ModalViewActionTypes.MODAL_ACTIVE:
             return {
